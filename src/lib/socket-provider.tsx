@@ -9,7 +9,7 @@ import {
 import { Socket } from "phoenix";
 import { setSocketInstance } from "./socket";
 
-const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL || "/socket";
+const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || "/socket";
 const MAX_ATTEMPTS = 5;
 
 export type ConnectionStatus =

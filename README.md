@@ -22,13 +22,13 @@ Open http://localhost:3000 to play.
 
 `make dev` starts both servers in parallel:
 
-- **Frontend** (Next.js) on port 3000 -- hot-reloads on file changes
+- **Frontend** (Vite) on port 3000 -- hot-reloads on file changes
 - **Server** (Phoenix) on port 4000 -- handles WebSocket channels
 
 You can also run them individually:
 
 ```bash
-make dev.frontend   # just the Next.js dev server
+make dev.frontend   # just the Vite dev server
 make dev.server     # just the Phoenix server
 ```
 
@@ -42,7 +42,7 @@ make serve    # start Phoenix on port 4000, serves the game at /
 ```
 
 The `deploy` target:
-1. Builds the Next.js app as a static export
+1. Builds the Vite app as static assets
 2. Copies the output into Phoenix's `priv/static/`
 3. Runs `mix phx.digest` for gzip and cache manifests
 
@@ -68,7 +68,8 @@ src/                    # Frontend (React Three Fiber)
   components/           # Scene, GooseRenderer, Lobby, etc.
   core/                 # ECS traits, systems, actions
   lib/                  # Socket and game-socket clients
-  pages/                # Next.js page (single page app)
+  App.tsx               # Root client app
+  main.tsx              # Vite entrypoint
 goose_server/           # Backend (Phoenix)
   lib/goose_server_web/ # Channels, controllers, endpoint
   lib/goose_server/     # Game registry

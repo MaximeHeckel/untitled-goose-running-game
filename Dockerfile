@@ -36,9 +36,9 @@ RUN . /root/.shrc && npm install
 COPY ./public ./public
 COPY ./src ./src
 COPY ./.agents ./.agents
-COPY ./tsconfig.json ./next.config.ts ./eslint.config.mjs ./
+COPY ./index.html ./tsconfig.json ./vite.config.ts ./eslint.config.mjs ./
 
-RUN . /root/.shrc && npx next build
+RUN . /root/.shrc && npx vite build
 RUN ls -alh
 
 FROM ${BUILDER_IMAGE} AS backend-builder
@@ -81,7 +81,7 @@ RUN mix compile
 COPY ./goose_server/assets assets
 
 # grab the frontend app
-COPY --from=frontend-builder /app/out/ priv/static/
+COPY --from=frontend-builder /app/dist/ priv/static/
 
 # compile assets
 RUN mix phx.digest

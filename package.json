@@ -3,31 +3,31 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "NEXT_PUBLIC_SOCKET_URL=ws://127.0.0.1:4000/socket bash -c 'next dev & p1=$!; (cd goose_server && exec mix phx.server) & p2=$!; trap \"kill $p1 $p2 2>/dev/null\" INT TERM EXIT; while kill -0 $p1 2>/dev/null && kill -0 $p2 2>/dev/null; do sleep 0.2; done; kill $p1 $p2 2>/dev/null; wait'",
-    "dev:next": "NEXT_PUBLIC_SOCKET_URL=ws://127.0.0.1:4000/socket next dev",
+    "dev": "VITE_SOCKET_URL=ws://127.0.0.1:4000/socket bash -c 'vite --host 127.0.0.1 & p1=$!; (cd goose_server && exec mix phx.server) & p2=$!; trap \"kill $p1 $p2 2>/dev/null\" INT TERM EXIT; while kill -0 $p1 2>/dev/null && kill -0 $p2 2>/dev/null; do sleep 0.2; done; kill $p1 $p2 2>/dev/null; wait'",
+    "dev:frontend": "VITE_SOCKET_URL=ws://127.0.0.1:4000/socket vite --host 127.0.0.1",
     "dev:phoenix": "cd goose_server && mix phx.server",
-    "build": "next build",
-    "start": "next start",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1",
     "lint": "eslint"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.5.0",
     "koota": "^0.6.5",
-    "next": "16.2.1",
     "phoenix": "^1.8.5",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "three": "^0.183.2"
   },
   "devDependencies": {
+    "@vitejs/plugin-react": "^5.1.0",
     "@flydotio/dockerfile": "^0.7.10",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/three": "^0.183.1",
     "eslint": "^9",
-    "eslint-config-next": "16.2.1",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vite": "^7.1.11"
   }
 }

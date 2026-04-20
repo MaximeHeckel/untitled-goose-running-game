@@ -79,7 +79,9 @@ defmodule GooseServer.MixProject do
         "frontend.build",
         "phx.digest"
       ],
-      "frontend.build": ["cmd bash -c 'cd .. && npx next build && cp -r out/* goose_server/priv/static/'"],
+      "frontend.build": [
+        "cmd bash -c 'cd .. && rm -rf goose_server/priv/static/_next && npx vite build && cp -r dist/* goose_server/priv/static/'"
+      ],
       precommit: ["compile --warnings-as-errors", "deps.unlock --unused", "format", "test"]
     ]
   end

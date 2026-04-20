@@ -41,11 +41,18 @@ dev:
 		npm run dev & \
 		wait
 
+dev.frontend:
+	npm run dev:frontend
+
+dev.server:
+	cd goose_server && mix phx.server
+
 # ── Production ─────────────────────────────────────────
 
 build:
-	npx next build
-	cp -r out/* goose_server/priv/static/
+	rm -rf goose_server/priv/static/_next
+	npx vite build
+	cp -r dist/* goose_server/priv/static/
 
 deploy: build
 	cd goose_server && mix phx.digest
@@ -63,8 +70,7 @@ test.server:
 # ── Cleanup ────────────────────────────────────────────
 
 clean:
-	rm -rf out .next
+	rm -rf dist
 	rm -rf goose_server/priv/static/_next
 	rm -rf goose_server/priv/static/index.html
-	rm -rf goose_server/priv/static/404.html
 	rm -f goose_server/priv/static/cache_manifest.json
