@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "bash -c 'next dev & p1=$!; (cd goose_server && exec mix phx.server) & p2=$!; trap \"kill $p1 $p2 2>/dev/null\" INT TERM EXIT; while kill -0 $p1 2>/dev/null && kill -0 $p2 2>/dev/null; do sleep 0.2; done; kill $p1 $p2 2>/dev/null; wait'",
-    "dev:next": "next dev",
+    "dev": "NEXT_PUBLIC_SOCKET_URL=ws://127.0.0.1:4000/socket bash -c 'next dev & p1=$!; (cd goose_server && exec mix phx.server) & p2=$!; trap \"kill $p1 $p2 2>/dev/null\" INT TERM EXIT; while kill -0 $p1 2>/dev/null && kill -0 $p2 2>/dev/null; do sleep 0.2; done; kill $p1 $p2 2>/dev/null; wait'",
+    "dev:next": "NEXT_PUBLIC_SOCKET_URL=ws://127.0.0.1:4000/socket next dev",
     "dev:phoenix": "cd goose_server && mix phx.server",
     "build": "next build",
     "start": "next start",
